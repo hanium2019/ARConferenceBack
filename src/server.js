@@ -9,6 +9,15 @@ import { authenticateJwt } from "./passport"
 import { isAuthenticated } from './middlewares'
 
 const PORT = process.env.PORT || 4000
+const options = {
+    port: PORT,
+    endpoint: '/graphql',
+    playground: '/playground',
+    subscriptions: '/subscriptions',
+    uploads: {
+        maxFileSize: 10000000, // 10 MB
+        maxFiles: 10},
+}
 
 const server = new GraphQLServer({ schema, 
     context: ({request}) => ({request, isAuthenticated }) 
@@ -17,4 +26,4 @@ const server = new GraphQLServer({ schema,
 server.express.use(logger("dev"))
 server.express.use(authenticateJwt)
 
-server.start({ port: PORT },() => console.log(`Server running on http://localhost:${PORT}`))
+server.start(options, () => console.log(`Server running on http://localhost:${PORT}`))

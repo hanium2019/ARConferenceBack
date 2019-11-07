@@ -72,3 +72,12 @@ type Message {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
+
+type FileUpload {
+  id: ID! @id
+  path: String!
+  filename: String!
+  mimetype: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
